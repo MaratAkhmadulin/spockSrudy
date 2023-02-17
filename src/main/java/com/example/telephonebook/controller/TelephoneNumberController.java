@@ -15,7 +15,7 @@ public class TelephoneNumberController {
     @Autowired
     TelephoneBookService telephoneBook;
 
-    @GetMapping(path = "/phone/list}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/phone/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<TelephoneBookEntity> getTelephoneNumbers() {
         return telephoneBook.getTelephoneNumbers();
     }

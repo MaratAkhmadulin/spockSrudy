@@ -14,6 +14,6 @@ public class TelephoneBookEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "numberPhone", length = 16, unique = true, nullable = false)
+    @Column(name = "phone", length = 16, nullable = false)
     private String numberPhone;
 }

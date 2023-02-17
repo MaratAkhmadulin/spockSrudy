@@ -1,21 +1,21 @@
 package com.example.telephonebook.service
 
 import com.example.telephonebook.domain.TelephoneBookEntity
-import com.example.telephonebook.exeption.ApiException
 import com.example.telephonebook.repository.TelephoneBookRepository
+import lombok.extern.slf4j.Slf4j
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
+@Slf4j
 @ContextConfiguration(classes = TelephoneBookService)
 class TelephoneBookServiceTest extends Specification {
 
     static final PHONE_NUM = '+7-912-111-11-11'
     static final PHONE_BOOK = new TelephoneBookEntity(numberPhone: PHONE_NUM)
     List<TelephoneBookEntity> phoneBookList = new ArrayList<>()
-    Optional<List<TelephoneBookEntity>> phoneBookListOptional
 
     @Autowired
     TelephoneBookService telephoneBookService
@@ -63,8 +63,7 @@ class TelephoneBookServiceTest extends Specification {
     def "Get one phoneNumber"() {
         given:
         phoneBookList.add(PHONE_BOOK)
-        phoneBookListOptional = Optional.ofNullable(phoneBookList)
-        telephoneBookRepository.getPhoneNumbers() >> phoneBookListOptional
+        telephoneBookRepository.findAll() >> phoneBookList
 
         when:
         def telephoneBook = telephoneBookService.getTelephoneNumbers()
@@ -80,8 +79,7 @@ class TelephoneBookServiceTest extends Specification {
         given:
         phoneBookList.add(PHONE_BOOK)
         phoneBookList.add(PHONE_BOOK)
-        phoneBookListOptional = Optional.ofNullable(phoneBookList)
-        telephoneBookRepository.getPhoneNumbers() >> phoneBookListOptional
+        telephoneBookRepository.findAll() >> phoneBookList
 
         when:
         def telephoneBook = telephoneBookService.getTelephoneNumbers()
@@ -95,14 +93,13 @@ class TelephoneBookServiceTest extends Specification {
 
     def "Get phoneNumbers with exception not found"() {
         given:
-        telephoneBookRepository.getPhoneNumbers() >> Optional.empty()
+        telephoneBookRepository.findAll() >> []
 
         when:
         def telephoneBook = telephoneBookService.getTelephoneNumbers()
 
         then:
         !telephoneBook
-        def e = thrown(ApiException)
-        e.getMessage() == "Not found telephone numbers"
+        noExceptionThrown()
     }
 }

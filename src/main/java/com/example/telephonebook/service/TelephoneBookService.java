@@ -1,7 +1,6 @@
 package com.example.telephonebook.service;
 
 import com.example.telephonebook.domain.TelephoneBookEntity;
-import com.example.telephonebook.exeption.ApiException;
 import com.example.telephonebook.repository.TelephoneBookRepository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +23,6 @@ public class TelephoneBookService {
     }
 
     public List<TelephoneBookEntity> getTelephoneNumbers() {
-        return telephoneBookRepository.getPhoneNumbers()
-                .orElseThrow(() -> new ApiException("Not found telephone numbers"));
+        return telephoneBookRepository.findAll();
     }
 }
