@@ -66,12 +66,12 @@ class TelephoneBookServiceTest extends Specification {
         telephoneBookRepository.findAll() >> phoneBookList
 
         when:
-        def telephoneBook = telephoneBookService.getTelephoneNumbers()
+        def telephoneBooks = telephoneBookService.getTelephoneNumbers()
 
         then:
-        telephoneBook
-        telephoneBook.size() == 1
-        telephoneBook == phoneBookList
+        telephoneBooks
+        telephoneBooks.size() == 1
+        telephoneBooks == phoneBookList
         noExceptionThrown()
     }
 
@@ -82,12 +82,12 @@ class TelephoneBookServiceTest extends Specification {
         telephoneBookRepository.findAll() >> phoneBookList
 
         when:
-        def telephoneBook = telephoneBookService.getTelephoneNumbers()
+        def telephoneBooks = telephoneBookService.getTelephoneNumbers()
 
         then:
-        telephoneBook
-        telephoneBook.size() == 2
-        telephoneBook == phoneBookList
+        telephoneBooks
+        telephoneBooks.size() == 2
+        telephoneBooks == phoneBookList
         noExceptionThrown()
     }
 
@@ -96,10 +96,10 @@ class TelephoneBookServiceTest extends Specification {
         telephoneBookRepository.findAll() >> []
 
         when:
-        def telephoneBook = telephoneBookService.getTelephoneNumbers()
+        def telephoneBooks = telephoneBookService.getTelephoneNumbers()
 
         then:
-        !telephoneBook
+        !telephoneBooks
         noExceptionThrown()
     }
 }
