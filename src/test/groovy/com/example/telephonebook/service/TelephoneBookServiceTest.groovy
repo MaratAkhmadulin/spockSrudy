@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
+import spock.lang.Timeout
 
 @Slf4j
+@Timeout(1)
 @ContextConfiguration(classes = TelephoneBookService)
 class TelephoneBookServiceTest extends Specification {
 

@@ -10,3 +10,6 @@ spring:
         spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
         hibernate:
             ddl-auto: create-drop
+
+mainmultiplier: 100
+discountmultiplier: 10
